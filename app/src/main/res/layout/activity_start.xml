@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                        android:id="@+id/activity_start"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/background"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#aaa"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/replace_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <RadioGroup
+            android:id="@+id/group_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            >
+
+            <RadioButton
+                android:id="@+id/news"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/more_btn_btm_selector"
+                android:gravity="center"
+                android:text="PAGE1"
+                android:textColor="@drawable/selector_rb2"
+                />
+
+            <RadioButton
+                android:id="@+id/contacts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/recmd_btn_btm_selector"
+                android:gravity="center"
+                android:text="PAGE2"
+                android:textColor="@drawable/selector_rb2"
+                />
+
+            <RadioButton
+                android:id="@+id/call_logs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/information_btn_btm_selector"
+                android:gravity="center"
+                android:text="PAGE3"
+                android:textColor="@drawable/selector_rb2"
+                />
+
+            <RadioButton
+                android:id="@+id/sms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/btn_btm_selector"
+                android:gravity="center"
+                android:text="PAGE4"
+                android:textColor="@drawable/selector_rb2"
+                />
+        </RadioGroup>
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/left_fragment"
+        android:name="com.example.admin.mydemo.fragment.LeftMenuFragment"
+        android:layout_width="220dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:tag="LEFTMENU"/>
+</android.support.v4.widget.DrawerLayout>

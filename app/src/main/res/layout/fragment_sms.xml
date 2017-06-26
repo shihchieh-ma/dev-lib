@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/phonenum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_goto"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:alpha="0.5"
+            android:background="#000"
+            android:hint="请输入手机号码"
+            android:padding="12dp"
+            android:textColor="#FFF"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_goto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="20dp"
+            android:alpha="0.5"
+            android:background="#000"
+            android:padding="12dp"
+            android:text="数据保存(SP)"
+            android:textColor="#FFF"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/img_navigation_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageButton
+            android:layout_margin="10dp"
+            android:id="@+id/img_cancel"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/splash_cancle" />
+
+        <Button
+            android:id="@+id/btn_enter"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="80dp"
+            android:background="@mipmap/splash_btn"
+            android:text="DemoTest"
+            android:textColor="#f0f"
+            android:textSize="15sp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</FrameLayout>
