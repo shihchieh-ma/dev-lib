@@ -16,8 +16,8 @@
         <ImageButton
             android:layout_margin="10dp"
             android:id="@+id/img_cancel"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@mipmap/splash_cancle" />
 
@@ -29,7 +29,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="80dp"
             android:background="@mipmap/splash_btn"
-            android:text="DemoTest"
+            android:text="start"
             android:textColor="#f0f"
             android:textSize="15sp"
             android:visibility="invisible" />

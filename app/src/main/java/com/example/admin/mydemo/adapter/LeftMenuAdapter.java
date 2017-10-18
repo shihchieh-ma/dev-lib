@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.admin.mydemo.R;
-import com.example.admin.mydemo.base.BaseHolder;
-import com.example.admin.mydemo.base.DefaultAdapter;
+import com.example.admin.mydemo.ui.base.BaseHolder;
+import com.example.admin.mydemo.ui.base.DefaultAdapter;
 import com.example.admin.mydemo.bean.LeftBean;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package com.example.admin.mydemo.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -9,8 +10,8 @@ import android.os.Environment;
 import android.os.Looper;
 import android.os.SystemClock;
 
-import com.example.admin.mydemo.base.BaseManager;
-import com.example.admin.mydemo.design.PoolInstance;
+import com.example.admin.mydemo.ui.base.BaseManager;
+import com.example.admin.mydemo.commen.PoolInstance;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -145,9 +146,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
             saveCrashInfoFile(ex);
             SystemClock.sleep(1000);
             //重启应用
-//            Intent intent = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName());
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            mContext.startActivity(intent);
+            Intent intent = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            mContext.startActivity(intent);
 
         } catch (Exception e) {
             Logs2File.logE(tag, e.toString());

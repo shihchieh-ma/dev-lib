@@ -1,6 +1,8 @@
 package com.example.admin.mydemo.adapter;
 
+import android.Manifest;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +12,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.admin.mydemo.R;
-import com.example.admin.mydemo.main.StartActivity;
+import com.example.admin.mydemo.commen.PoolInstance;
+import com.example.admin.mydemo.ui.activity.StartActivity;
+import com.example.admin.mydemo.utils.CrashHandler;
+import com.example.admin.mydemo.utils.OnRequestPermissionCallbackAdapter;
+import com.example.admin.mydemo.utils.PermUtil;
 
 import java.util.ArrayList;
+
+import static com.example.admin.mydemo.MyApplication.getApplication;
 
 /**
  * Author：Marlborn
@@ -47,8 +55,7 @@ public class ViewPageAdapter extends PagerAdapter {
 
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, StartActivity.class));
-                context.finish();
+                askPermTurnTo();
             }
         });
 
@@ -75,8 +82,7 @@ public class ViewPageAdapter extends PagerAdapter {
                 btn.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, StartActivity.class));
-                        context.finish();
+                        askPermTurnTo();
                     }
                 });
                 break;
@@ -102,5 +108,45 @@ public class ViewPageAdapter extends PagerAdapter {
     @Override
     public int getItemPosition(Object object) {
         return super.getItemPosition(object);
+    }
+
+    private void askPermTurnTo(){
+        PermUtil.getInstance().checkAndRequestPermissions(new String[]{
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0, new OnRequestPermissionCallbackAdapter() {
+            @Override
+            public void onSuccess(int requestCode, @NonNull String[] permissions) {
+                super.onSuccess(requestCode, permissions);
+                context.startActivity(new Intent(context, StartActivity.class));
+                //崩溃日志记录
+                PoolInstance.getPoolInstance().startThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CrashHandler.getInstance().init(getApplication(), 7);
+                    }
+                });
+                context.finish();
+            }
+
+            @Override
+            public void onFailed(int requestCode, @NonNull String[] permissions) {
+                super.onFailed(requestCode, permissions);
+                // 处理申请失败
+            }
+
+            @Override
+            public void onCheckedAlreadyGranted(String[] permissions) {
+                super.onCheckedAlreadyGranted(permissions);
+                //崩溃日志记录
+                PoolInstance.getPoolInstance().startThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CrashHandler.getInstance().init(getApplication(), 7);
+                    }
+                });
+                context.startActivity(new Intent(context, StartActivity.class));
+                context.finish();
+            }
+        });
     }
 }

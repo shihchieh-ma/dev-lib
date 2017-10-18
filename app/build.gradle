@@ -5,9 +5,6 @@ buildscript {
     repositories {
         mavenCentral()
     }
-    dependencies {
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.0.0'
-    }
 }
 
 greendao {

@@ -1,6 +1,6 @@
 package com.example.admin.mydemo.http;
 
-import com.example.admin.mydemo.application.MyApplication;
+import com.example.admin.mydemo.MyApplication;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,9 +21,6 @@ public class OKHttpFactory {
 
     private OKHttpFactory(){
         client = new OkHttpClient.Builder().cache(cache)
-//                .addInterceptor(new LoggingInterceptor()) //打印log
-                .addNetworkInterceptor(new LoggingInterceptor())
-                .addInterceptor(new UserAgentInterceptor("retrofit"))
                 //走缓存，两个都要设置
                 .addInterceptor(new OnOffLineCachedInterceptor())
                 .addNetworkInterceptor(new OnOffLineCachedInterceptor())

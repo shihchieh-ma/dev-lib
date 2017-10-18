@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.example.admin.mydemo.application.MyApplication;
+import com.example.admin.mydemo.MyApplication;
 
 /**
  * Created by Marl_Jar on 2017/6/8.

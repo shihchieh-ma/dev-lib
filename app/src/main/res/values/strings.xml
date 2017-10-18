@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyDemo</string>
+    <string name="app_name">大众Style</string>
     <string name="primary">primary</string>
     <string name="contentdownload">content://downloads/public_downloads</string>
     <string name="cgaapc">com.google.android.apps.photos.content</string>

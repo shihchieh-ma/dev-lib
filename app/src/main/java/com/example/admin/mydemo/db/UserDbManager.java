@@ -1,6 +1,6 @@
 package com.example.admin.mydemo.db;
 
-import com.example.admin.mydemo.base.BaseManager;
+import com.example.admin.mydemo.ui.base.BaseManager;
 import com.example.admin.mydemo.bean.UserBean;
 
 import org.greenrobot.greendao.AbstractDao;
