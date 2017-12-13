@@ -2,6 +2,7 @@ package dev.majes.base.mvp;
 
 import java.lang.ref.WeakReference;
 
+import dev.majes.base.log.Log;
 import dev.majes.base.rxbus.IRxMsg;
 
 /**
@@ -15,6 +16,7 @@ public class BasePresenter<V extends IView> implements IPrensenter<V> {
     @Override
     public void bindView(V view) {
         v = new WeakReference<V>(view).get();
+        Log.e(v);
     }
 
     @Override

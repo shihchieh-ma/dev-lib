@@ -1,7 +1,6 @@
 package dev.majes.base.mvp;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -118,9 +117,11 @@ public abstract class BaseFragment<P extends IPrensenter> extends RxFragment imp
                 if (null == p) {
                     p = getP();
                 }
+                if (null != p){
+                    p.bindView(this);
+                }
             }
         }
-        p.bindView(this);
         return p;
     }
 

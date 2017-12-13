@@ -145,11 +145,14 @@ public abstract class BaseActivity<P extends IPrensenter> extends RxAppCompatAct
         if (p == null) {
             synchronized (BaseFragment.class) {
                 if (null == p) {
+                    Log.e("getP()"+getP());
                     p = getP();
+                }
+                if (null != p){
+                    p.bindView(this);
                 }
             }
         }
-        p.bindView(this);
         return p;
     }
 

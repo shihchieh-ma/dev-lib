@@ -94,9 +94,11 @@ public abstract class BaseLazyLoadFragment<P extends IPrensenter> extends ALazyF
                 if (null == p) {
                     p = getP();
                 }
+                if (null != p){
+                    p.bindView(this);
+                }
             }
         }
-        p.bindView(this);
         return p;
     }
 
