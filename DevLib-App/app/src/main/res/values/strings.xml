@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">模板</string>
+    <string name="primary">primary</string>
+    <string name="contentdownload">content://downloads/public_downloads</string>
+    <string name="cgaapc">com.google.android.apps.photos.content</string>
+    <string name="capdd">com.android.providers.downloads.documents</string>
+    <string name="capmd">com.android.providers.media.documents</string>
+    <string name="caed">com.android.externalstorage.documents</string>
+</resources>
