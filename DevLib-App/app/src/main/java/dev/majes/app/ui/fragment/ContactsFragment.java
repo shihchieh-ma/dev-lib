@@ -29,15 +29,6 @@ public class ContactsFragment extends BaseFragment{
         return R.layout.fragment;
     }
 
-    @Override
-    public void onRxBusMsg(IRxMsg iRxMsg) {
-
-    }
-
-    @Override
-    public Object getP() {
-        return null;
-    }
 }
 
 

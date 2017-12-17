@@ -52,23 +52,11 @@ public abstract class BaseFragment<P extends IPrensenter> extends RxFragment imp
     @Override
     public void onStart() {
         super.onStart();
-        if (useRxBus()){
-            rxBus = RxBus.getIntanceBus();
-            initRxBus();
-        }
     }
 
-    private void initRxBus() {
+
+    protected  <T> void registerRxBus(Class<T> eventType, Consumer<T> action) {
         rxBus = RxBus.getIntanceBus();
-        registerRxBus(IRxMsg.class, new Consumer<IRxMsg>() {
-            @Override
-            public void accept(@NonNull IRxMsg iRxMsg) throws Exception {
-                p.registerRxBus(iRxMsg);
-            }
-        });
-    }
-
-    private <T> void registerRxBus(Class<T> eventType, Consumer<T> action) {
         Disposable disposable = rxBus.doSubscribe(eventType, action, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
@@ -78,15 +66,10 @@ public abstract class BaseFragment<P extends IPrensenter> extends RxFragment imp
         rxBus.addSubscription(this, disposable);
     }
 
-    @Override
-    public boolean useRxBus() {
-        return false;
-    }
-
-    public RxPermissions getRxPermissions(){
-        if (null == rxPermissions){
-            synchronized (BaseFragment.class){
-                if (null == rxPermissions){
+    protected RxPermissions getRxPermissions() {
+        if (null == rxPermissions) {
+            synchronized (BaseFragment.class) {
+                if (null == rxPermissions) {
                     rxPermissions = new RxPermissions(getActivity());
                 }
             }
@@ -117,7 +100,7 @@ public abstract class BaseFragment<P extends IPrensenter> extends RxFragment imp
                 if (null == p) {
                     p = getP();
                 }
-                if (null != p){
+                if (null != p) {
                     p.bindView(this);
                 }
             }
@@ -147,7 +130,7 @@ public abstract class BaseFragment<P extends IPrensenter> extends RxFragment imp
         if (getCorrespondingP() != null) {
             getCorrespondingP().unBindView();
         }
-        if (null != rxPermissions){
+        if (null != rxPermissions) {
             rxPermissions = null;
         }
         getCyc().destory();
@@ -158,5 +141,11 @@ public abstract class BaseFragment<P extends IPrensenter> extends RxFragment imp
             rxBus = null;
         }
     }
+
+    @Override
+    public P getP() {
+        return null;
+    }
+
 
 }

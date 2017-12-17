@@ -13,5 +13,4 @@ public interface IPrensenter<V> {
 
     void unBindView();
 
-    void registerRxBus(IRxMsg iRxMsg);
 }

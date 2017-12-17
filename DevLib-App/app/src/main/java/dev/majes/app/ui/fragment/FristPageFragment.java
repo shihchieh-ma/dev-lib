@@ -6,14 +6,14 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import dev.majes.app.R;
-import dev.majes.base.mvp.BaseLazyLoadFragment;
-import dev.majes.base.rxbus.IRxMsg;
+import dev.majes.base.log.Log;
+import dev.majes.base.mvp.BaseLazyFragment;
 
 /**
  * Author：Marlborn
  * Email：marlborn@foxmail.com
  */
-public class FristPageFragment extends BaseLazyLoadFragment {
+public class FristPageFragment extends BaseLazyFragment {
 
     @Override
     public void bindUI(View rootView) {
@@ -22,7 +22,7 @@ public class FristPageFragment extends BaseLazyLoadFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        Log.e("-----------------");
     }
 
     @Override
@@ -30,15 +30,6 @@ public class FristPageFragment extends BaseLazyLoadFragment {
         return R.layout.fragment;
     }
 
-    @Override
-    public void onRxBusMsg(IRxMsg iRxMsg) {
-
-    }
-
-    @Override
-    public Object getP() {
-        return null;
-    }
 
     @Override
     protected View getPreviewLayout(LayoutInflater mInflater, FrameLayout layout) {

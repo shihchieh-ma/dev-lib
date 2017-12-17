@@ -35,58 +35,38 @@ public abstract class BaseActivity<P extends IPrensenter> extends RxAppCompatAct
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(getLayoutId());
-        bindUI(null);
         initData(savedInstanceState);
     }
 
     @Override
     public void bindUI(View rootView) {
-
+        // do nothing
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-
-    }
+    public abstract void initData(Bundle savedInstanceState);
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (useRxBus()) {
-            rxBus = RxBus.getIntanceBus();
-            initRxBus();
-        }
     }
 
-    private void initRxBus() {
+
+
+    protected  <T> void registerRxBus(Class<T> eventType, Consumer<T> action) {
         rxBus = RxBus.getIntanceBus();
-        registerRxBus(IRxMsg.class, new Consumer<IRxMsg>() {
-            @Override
-            public void accept(@NonNull IRxMsg iRxMsg) throws Exception {
-                p.registerRxBus(iRxMsg);
-            }
-        });
-    }
-
-    private <T> void registerRxBus(Class<T> eventType, Consumer<T> action) {
         Disposable disposable = rxBus.doSubscribe(eventType, action, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
-                Log.e("NewsMainPresenter" + throwable.toString());
+                Log.e(throwable);
             }
         });
         rxBus.addSubscription(this, disposable);
     }
 
     @Override
-    public boolean useRxBus() {
-        return false;
-    }
+    public abstract int getLayoutId();
 
-    @Override
-    public int getLayoutId() {
-        return 0;
-    }
 
     @Override
     protected void onResume() {
@@ -119,7 +99,7 @@ public abstract class BaseActivity<P extends IPrensenter> extends RxAppCompatAct
         }
     }
 
-    public RxPermissions getRxPermissions() {
+    protected RxPermissions getRxPermissions() {
         if (null == rxPermissions) {
             synchronized (BaseFragment.class) {
                 if (null == rxPermissions) {
@@ -141,11 +121,15 @@ public abstract class BaseActivity<P extends IPrensenter> extends RxAppCompatAct
         return cyc;
     }
 
+    @Override
+    public P getP() {
+        return null;
+    }
+
     protected P getCorrespondingP() {
         if (p == null) {
             synchronized (BaseFragment.class) {
                 if (null == p) {
-                    Log.e("getP()"+getP());
                     p = getP();
                 }
                 if (null != p){

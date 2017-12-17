@@ -49,13 +49,4 @@ public class LeftMenuFragment extends BaseFragment {
 		return R.layout.left_menu;
 	}
 
-	@Override
-	public void onRxBusMsg(IRxMsg iRxMsg) {
-
-	}
-
-	@Override
-	public Object getP() {
-		return null;
-	}
 }

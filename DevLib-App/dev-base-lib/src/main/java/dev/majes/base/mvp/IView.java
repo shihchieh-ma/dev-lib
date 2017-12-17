@@ -16,10 +16,6 @@ public interface IView<P> {
     void initData(Bundle savedInstanceState);
 
     int getLayoutId();
-    
-    boolean useRxBus();
-
-    void onRxBusMsg(IRxMsg iRxMsg);
 
     P getP();
 }

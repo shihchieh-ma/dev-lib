@@ -47,7 +47,6 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        super.initData(savedInstanceState);
         initViews();
         initData();
     }
@@ -107,17 +106,6 @@ public class SplashActivity extends BaseActivity {
         // 设置viewpager的适配器和监听事件
         mViewPager.setAdapter(new ViewPageAdapter(this,pageViews));
         mViewPager.setOnPageChangeListener(new NavigationPageChangeListener());
-    }
-
-
-    @Override
-    public void onRxBusMsg(IRxMsg iRxMsg) {
-
-    }
-
-    @Override
-    public Object getP() {
-        return null;
     }
 
     private class NavigationPageChangeListener implements OnPageChangeListener {

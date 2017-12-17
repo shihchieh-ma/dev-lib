@@ -18,6 +18,12 @@ public class WaitShowUtils {
     private volatile static Dialog dialog;
 
     public static Dialog getDialog(Context context) {
+        if (null != dialog) {
+            if (dialog.isShowing()){
+                dialog.dismiss();
+            }
+            dialog = null;
+        }
         if (null == dialog) {
             synchronized (WaitShowUtils.class) {
                 dialog = new Dialog(context);
@@ -39,14 +45,12 @@ public class WaitShowUtils {
     }
 
 
-    public static void dismiss() {
-        if (null != dialog) {
-            dialog.dismiss();
-        }
-    }
 
     public static void release() {
         if (null != dialog) {
+            if (dialog.isShowing()){
+                dialog.dismiss();
+            }
             dialog = null;
         }
     }

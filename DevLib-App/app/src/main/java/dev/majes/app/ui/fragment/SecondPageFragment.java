@@ -3,6 +3,7 @@ package dev.majes.app.ui.fragment;
 import android.os.Bundle;
 import android.view.View;
 import dev.majes.app.R;
+import dev.majes.base.log.Log;
 import dev.majes.base.mvp.BaseFragment;
 import dev.majes.base.rxbus.IRxMsg;
 
@@ -20,7 +21,7 @@ public class SecondPageFragment extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        Log.e("-----------------");
     }
 
     @Override
@@ -28,13 +29,4 @@ public class SecondPageFragment extends BaseFragment {
         return R.layout.fragment;
     }
 
-    @Override
-    public void onRxBusMsg(IRxMsg iRxMsg) {
-
-    }
-
-    @Override
-    public Object getP() {
-        return null;
-    }
 }

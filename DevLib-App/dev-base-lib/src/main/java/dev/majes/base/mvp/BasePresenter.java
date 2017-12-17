@@ -16,7 +16,6 @@ public class BasePresenter<V extends IView> implements IPrensenter<V> {
     @Override
     public void bindView(V view) {
         v = new WeakReference<V>(view).get();
-        Log.e(v);
     }
 
     @Override
@@ -26,10 +25,6 @@ public class BasePresenter<V extends IView> implements IPrensenter<V> {
         }
     }
 
-    @Override
-    public void registerRxBus(IRxMsg iRxMsg) {
-        v.onRxBusMsg(iRxMsg);
-    }
 
     protected V getV() {
         if (v == null) {

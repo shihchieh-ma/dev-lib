@@ -44,7 +44,6 @@ public class StartActivity extends BaseActivity implements
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        super.initData(savedInstanceState);
         groupTabs = findViewById(R.id.group_tabs);
         rb1 = findViewById(R.id.news);
         rb2 = findViewById(R.id.contacts);
@@ -152,19 +151,4 @@ public class StartActivity extends BaseActivity implements
         transaction.commit();
     }
 
-
-    @Override
-    public void onRxBusMsg(IRxMsg iRxMsg) {
-
-    }
-
-    @Override
-    protected IPrensenter getCorrespondingP() {
-        return null;
-    }
-
-    @Override
-    public Object getP() {
-        return null;
-    }
 }

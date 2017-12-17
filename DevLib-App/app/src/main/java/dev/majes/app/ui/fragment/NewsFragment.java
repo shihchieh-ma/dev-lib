@@ -65,14 +65,4 @@ public class NewsFragment extends BaseFragment {
         return R.layout.home_fragment;
     }
 
-
-    @Override
-    public void onRxBusMsg(IRxMsg iRxMsg) {
-
-    }
-
-    @Override
-    public Object getP() {
-        return null;
-    }
 }
