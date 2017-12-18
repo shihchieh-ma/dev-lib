@@ -23,6 +23,7 @@ import static android.R.attr.versionCode;
 import static android.content.ContentValues.TAG;
 
 /**
+ * 检测是否有悬浮窗权限并且有跳转的工具类
  * @author majes
  */
 

@@ -9,6 +9,7 @@
 
     <dimen name="ivleft">5dp</dimen>
     <dimen name="centermargin">2dp</dimen>
+    <dimen name="centermargin2">1dp</dimen>
     <dimen name="search_bar_height">48dp</dimen>
     <dimen name="search_bar_left_icon_left_margin">4dp</dimen>
     <dimen name="search_bar_right_icon_right_margin">4dp</dimen>

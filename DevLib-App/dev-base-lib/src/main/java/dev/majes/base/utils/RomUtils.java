@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
+ * 判断rom工具类
  * @author majes
  */
 

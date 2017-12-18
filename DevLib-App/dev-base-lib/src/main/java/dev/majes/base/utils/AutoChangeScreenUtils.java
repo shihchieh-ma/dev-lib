@@ -12,6 +12,7 @@ import android.os.Message;
 
 
 /**
+ * 根据陀螺仪旋转屏幕
  * @author majes
  * @date 11/29/17.
  */

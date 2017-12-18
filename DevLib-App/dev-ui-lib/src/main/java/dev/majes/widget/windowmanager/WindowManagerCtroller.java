@@ -1,16 +1,14 @@
 package dev.majes.widget.windowmanager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import dev.majes.R;
-import dev.majes.base.utils.DPXUtils;
+import dev.majes.base.utils.WindowUtils;
+import ren.yale.android.cachewebviewlib.CacheWebView;
 
 
 /**
@@ -25,7 +23,7 @@ public class WindowManagerCtroller implements View.OnClickListener {
     private volatile static WindowManagerCtroller windowManagerCtroller;
     private static android.view.WindowManager androidWindowManager;
     private static DisplayMetrics dm;
-    private  boolean cantCreate = false;
+    private boolean cantCreate = false;
     private FrameLayout frameLayout;
 
     private WindowManagerCtroller(Context context) {
@@ -47,23 +45,25 @@ public class WindowManagerCtroller implements View.OnClickListener {
         return windowManagerCtroller;
     }
 
-    public void setCantCreate(boolean cantCreate){
-        this.cantCreate = cantCreate;
-    }
 
-    public boolean createWindowView() {
+    public void createWindowView() {
         if (cantCreate) {
-            return !cantCreate;
+            return;
+        }
+        if (!WindowUtils.checkFloatWindowPermission(context)) {
+            WindowUtils.showDialogTipUserRequestPermission(context);
+            return;
         }
         View windowView = LayoutInflater.from(context).inflate(R.layout.window_view, null, false);
         frameLayout = windowView.findViewById(R.id.float_root_view);
         windowView.setOnClickListener(this);
-        FrameLayout.LayoutParams fl = new FrameLayout.LayoutParams(
-                DPXUtils.dip2px(context,320),
-                DPXUtils.dip2px(context,240),
-                Gravity.CENTER
-        );
-
+//        FrameLayout.LayoutParams fl = new FrameLayout.LayoutParams(
+//                DPXUtils.dip2px(context,240),
+//                DPXUtils.dip2px(context,320),
+//                Gravity.CENTER
+//        );
+        CacheWebView cacheWebView = windowView.findViewById(R.id.cache_wv);
+        cacheWebView.loadUrl("http://www.baidu.com");
         this.windowManager = new WindowManager(context);
         WindowManager.Configs configs = new WindowManager.Configs();
         configs.floatingViewX = dm.widthPixels / 2;
@@ -71,16 +71,14 @@ public class WindowManagerCtroller implements View.OnClickListener {
         configs.overMargin = -(int) (8 * dm.density);
         this.windowManager.andWindowView(windowView, configs);
         cantCreate = !cantCreate;
-        return !cantCreate;
     }
 
     @Override
     public void onClick(View v) {
         destoryWindowView();
-       // Intent i = new Intent(context,Activity.class);
-       // i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-       // context.startActivity(i);
-
+        // Intent i = new Intent(context,Activity.class);
+        // i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // context.startActivity(i);
     }
 
     private void destoryWindowView() {
@@ -96,6 +94,9 @@ public class WindowManagerCtroller implements View.OnClickListener {
         }
         if (null != windowManagerCtroller) {
             windowManagerCtroller = null;
+        }
+        if (null != context){
+            context = null;
         }
         cantCreate = false;
     }

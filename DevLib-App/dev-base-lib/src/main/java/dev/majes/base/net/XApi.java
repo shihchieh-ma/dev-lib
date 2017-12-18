@@ -1,11 +1,15 @@
 package dev.majes.base.net;
 
+import android.text.TextUtils;
+
 import org.reactivestreams.Publisher;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import dev.majes.base.log.Log;
 import dev.majes.base.net.progress.ProgressHelper;
 import dev.majes.base.utils.FileUtils;
 import io.reactivex.Flowable;
@@ -16,6 +20,8 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -137,6 +143,10 @@ public class XApi {
             }
         }
 
+        if (null != provider.configCache()) {
+            builder.cache(provider.configCache());
+        }
+
         if (provider.configLogEnable()) {
             LogInterceptor logInterceptor = new LogInterceptor();
             builder.addInterceptor(logInterceptor);
@@ -209,7 +219,7 @@ public class XApi {
 //                        } else if (model.isBizError()) {
 //                            return Flowable.error(new NetError(model.getErrorMsg(), NetError.BusinessError));
 //                        } else {
-                            return Flowable.just(model);
+                        return Flowable.just(model);
 //                        }
                     }
                 });

@@ -11,6 +11,7 @@ import dev.majes.base.log.Log;
 
 
 /**
+ * 网络工具类
  * assist us in sensing state of the networks.
  * Created by D on 2017/10/24.
  */

@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 系统工具类
  * @author majes
  */
 

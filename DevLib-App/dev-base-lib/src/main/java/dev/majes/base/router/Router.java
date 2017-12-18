@@ -12,9 +12,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-/**
- * Created by wanglei on 2016/11/29.
- */
 public class Router {
     private int ROUTER_ANIM_ENTER = -1;
     private int ROUTER_ANIM_EXIT = -1;
@@ -127,6 +124,11 @@ public class Router {
 
     public Router putStringArrayList(@Nullable String key, @Nullable ArrayList<String> value) {
         getBundleData().putStringArrayList(key, value);
+        return this;
+    }
+
+    public Router putByteArray(@Nullable String key, @Nullable byte[] value) {
+        getBundleData().putByteArray(key, value);
         return this;
     }
 

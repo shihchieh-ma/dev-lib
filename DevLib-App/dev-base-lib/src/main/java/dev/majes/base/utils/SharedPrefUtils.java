@@ -3,7 +3,10 @@ package dev.majes.base.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
+/**
+ * sp工具类
+ * @author majes
+ */
 public class SharedPrefUtils {
 
     private static SharedPreferences sharedPreferences;

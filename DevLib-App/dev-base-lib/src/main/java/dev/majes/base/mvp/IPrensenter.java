@@ -1,7 +1,5 @@
 package dev.majes.base.mvp;
 
-import dev.majes.base.rxbus.IRxMsg;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author majes

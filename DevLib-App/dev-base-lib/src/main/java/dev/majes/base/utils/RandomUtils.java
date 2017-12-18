@@ -3,6 +3,7 @@ package dev.majes.base.utils;
 import android.text.TextUtils;
 
 /**
+ * 随机工具类
  * @author majes
  * @date 12/11/17.
  */

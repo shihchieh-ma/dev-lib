@@ -3,11 +3,9 @@ package dev.majes.base;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.text.TextUtils;
 
 
-import com.scwang.smartrefresh.header.FlyRefreshHeader;
-import com.scwang.smartrefresh.header.FunGameHitBlockHeader;
-import com.scwang.smartrefresh.header.PhoenixHeader;
 import com.scwang.smartrefresh.header.WaveSwipeHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -16,12 +14,11 @@ import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
 import dev.majes.base.database.DaoManager;
 import dev.majes.base.log.Log;
@@ -29,11 +26,13 @@ import dev.majes.base.net.NetError;
 import dev.majes.base.net.NetProvider;
 import dev.majes.base.net.RequestHandler;
 import dev.majes.base.net.XApi;
-import dev.majes.base.utils.DPXUtils;
 import dev.majes.base.utils.ThreadPoolUtils;
+import okhttp3.Cache;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import ren.yale.android.cachewebviewlib.CacheWebView;
 
 /**
@@ -44,7 +43,11 @@ import ren.yale.android.cachewebviewlib.CacheWebView;
 public class DevLibApplication extends Application {
 
     private static Context context;
-    private static final String CACHE_NAME = "wv_cache_path";
+    private static final String CACHE_WEBVIEW = "wv_cache_path";
+    private static final String CACHE_NET = "retrofit_cache_path";
+    private static Cache cache;
+    private static final long CONNECTTIMEOUT = 30 * 1000l;
+    private static final long READTIMEOUT = 30 * 1000l;
 
     static {
         //设置全局的Header构建器
@@ -69,11 +72,20 @@ public class DevLibApplication extends Application {
         });
     }
 
+    private RefWatcher refWatcher;
+
+    public static RefWatcher getRefWatcher(Context context) {
+        DevLibApplication application = (DevLibApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
+    private Interceptor[] ir;
+
     @Override
     public void onCreate() {
         super.onCreate();
         DevLibApplication.context = this;
-
+        LeakCanary.install(this);
         ThreadPoolUtils.execute(new Runnable() {
             @Override
             public void run() {
@@ -83,12 +95,36 @@ public class DevLibApplication extends Application {
                 final boolean isDebugVersion = (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
                 Log.init("Dev-Lib", isDebugVersion);
                 DaoManager.getDaoManager().setDebug(isDebugVersion);
+                //设置缓存路径
+                File httpCacheDirectory = new File(context.getCacheDir(), CACHE_NET);
+                //设置缓存 50M
+                cache = new Cache(httpCacheDirectory, 50 * 1024 * 1024);
+                Interceptor interceptor = new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request();
+                        Log.d("request=" + request);
+                        Response response = chain.proceed(request);
+                        Log.d("response=" + response);
 
+                        String cacheControl = request.cacheControl().toString();
+                        if (TextUtils.isEmpty(cacheControl)) {
+                            cacheControl = "public, max-age=60";
+                        }
+                        return response.newBuilder()
+                                .header("Cache-Control", cacheControl)
+                                .removeHeader("Pragma")
+                                .build();
+                    }
+                };
+
+                ir = new Interceptor[]{interceptor};
                 XApi.registerProvider(new NetProvider() {
 
                     @Override
                     public Interceptor[] configInterceptors() {
-                        return new Interceptor[0];
+//                        return new Interceptor[0];
+                        return ir;
                     }
 
                     @Override
@@ -108,12 +144,12 @@ public class DevLibApplication extends Application {
 
                     @Override
                     public long configConnectTimeoutMills() {
-                        return 0;
+                        return CONNECTTIMEOUT;
                     }
 
                     @Override
                     public long configReadTimeoutMills() {
-                        return 0;
+                        return READTIMEOUT;
                     }
 
                     @Override
@@ -130,10 +166,16 @@ public class DevLibApplication extends Application {
                     public boolean dispatchProgressEnable() {
                         return false;
                     }
+
+                    @Override
+                    public Cache configCache() {
+//                        return null;
+                        return cache;
+                    }
                 });
 
-                File cacheFile = new File(context.getCacheDir(),CACHE_NAME);
-                CacheWebView.getCacheConfig().init(context,cacheFile.getAbsolutePath(),1024*1024*100,1024*1024*10)
+                File cacheFile = new File(context.getCacheDir(), CACHE_WEBVIEW);
+                CacheWebView.getCacheConfig().init(context, cacheFile.getAbsolutePath(), 1024 * 1024 * 100, 1024 * 1024 * 10)
                         .enableDebug(isDebugVersion);
             }
         });
@@ -148,4 +190,5 @@ public class DevLibApplication extends Application {
         }
         return context;
     }
+
 }

@@ -2,9 +2,6 @@ package dev.majes.base.router;
 
 import android.app.Activity;
 
-/**
- * Created by wanglei on 2016/11/29.
- */
 
 public interface RouterCallback {
 

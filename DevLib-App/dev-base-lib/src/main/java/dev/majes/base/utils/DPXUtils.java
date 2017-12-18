@@ -3,6 +3,7 @@ package dev.majes.base.utils;
 import android.content.Context;
 
 /**
+ * dp,px转换工具类
  * @author majes
  * @date 11/30/17.
  */

@@ -8,11 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.leakcanary.RefWatcher;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
+import dev.majes.base.DevLibApplication;
 import dev.majes.base.log.Log;
-import dev.majes.base.rxbus.IRxMsg;
 import dev.majes.base.rxbus.RxBus;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -20,12 +21,13 @@ import io.reactivex.functions.Consumer;
 
 
 /**
+ * normal fragment
  * @author majes
  * @date 12/11/17.
  */
 
 public abstract class BaseFragment<P extends IPrensenter> extends RxFragment implements IView<P> {
-    private ICyc cyc;
+
     private P p;
     protected Activity activity;
     private View view;
@@ -83,16 +85,6 @@ public abstract class BaseFragment<P extends IPrensenter> extends RxFragment imp
         initData(savedInstanceState);
     }
 
-    protected ICyc getCyc() {
-        if (null == cyc) {
-            synchronized (BaseFragment.class) {
-                if (null == cyc) {
-                    cyc = CycImpl.create(activity);
-                }
-            }
-        }
-        return cyc;
-    }
 
     protected P getCorrespondingP() {
         if (p == null) {
@@ -133,13 +125,13 @@ public abstract class BaseFragment<P extends IPrensenter> extends RxFragment imp
         if (null != rxPermissions) {
             rxPermissions = null;
         }
-        getCyc().destory();
         p = null;
-        cyc = null;
         if (null != rxBus) {
             rxBus.unSubscribe(this);
             rxBus = null;
         }
+        RefWatcher refWatcher = DevLibApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     @Override

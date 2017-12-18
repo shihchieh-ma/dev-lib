@@ -2,8 +2,6 @@ package dev.majes.base.mvp;
 
 import java.lang.ref.WeakReference;
 
-import dev.majes.base.log.Log;
-import dev.majes.base.rxbus.IRxMsg;
 
 /**
  * @author majes

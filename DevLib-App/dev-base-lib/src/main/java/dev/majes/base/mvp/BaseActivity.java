@@ -9,7 +9,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import dev.majes.base.log.Log;
-import dev.majes.base.rxbus.IRxMsg;
 import dev.majes.base.rxbus.RxBus;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -24,7 +23,6 @@ import io.reactivex.functions.Consumer;
 public abstract class BaseActivity<P extends IPrensenter> extends RxAppCompatActivity
         implements IView<P> {
 
-    private ICyc cyc;
     private P p;
     protected Activity context;
     private RxPermissions rxPermissions;
@@ -68,18 +66,6 @@ public abstract class BaseActivity<P extends IPrensenter> extends RxAppCompatAct
     public abstract int getLayoutId();
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getCyc().resume();
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        getCyc().pause();
-    }
 
     @Override
     protected void onDestroy() {
@@ -87,9 +73,7 @@ public abstract class BaseActivity<P extends IPrensenter> extends RxAppCompatAct
         if (getCorrespondingP() != null) {
             getCorrespondingP().unBindView();
         }
-        getCyc().destory();
         p = null;
-        cyc = null;
         if (null != rxBus) {
             rxBus.unSubscribe(this);
             rxBus = null;
@@ -110,16 +94,6 @@ public abstract class BaseActivity<P extends IPrensenter> extends RxAppCompatAct
         return rxPermissions;
     }
 
-    protected ICyc getCyc() {
-        if (null == cyc) {
-            synchronized (BaseFragment.class) {
-                if (null == cyc) {
-                    cyc = CycImpl.create(this);
-                }
-            }
-        }
-        return cyc;
-    }
 
     @Override
     public P getP() {

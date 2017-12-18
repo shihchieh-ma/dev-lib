@@ -1,19 +1,17 @@
 package dev.majes.base.mvp;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import dev.majes.base.log.Log;
-import dev.majes.base.rxbus.IRxMsg;
 import dev.majes.base.rxbus.RxBus;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 
 /**
+ * 懒加载 fragment
  * @author majes
  * @date 12/17/17.
  */
@@ -21,7 +19,6 @@ import io.reactivex.functions.Consumer;
 public abstract class BaseLazyFragment<P extends IPrensenter>
         extends LazyFragment implements IView<P> {
 
-    private ICyc iCyc;
     private P p;
     private RxBus rxBus;
 
@@ -39,26 +36,12 @@ public abstract class BaseLazyFragment<P extends IPrensenter>
 
     protected <T> void registerRxBus(Class<T> eventType, Consumer<T> action) {
         rxBus = RxBus.getIntanceBus();
-        Disposable disposable = rxBus.doSubscribe(eventType, action, new Consumer<Throwable>() {
+        rxBus.addSubscription(this, rxBus.doSubscribe(eventType, action, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
                 Log.e(throwable);
             }
-        });
-        rxBus.addSubscription(this, disposable);
-    }
-
-
-
-    protected ICyc getCyc() {
-        if (null == iCyc) {
-            synchronized (BaseFragment.class) {
-                if (null == iCyc) {
-                    iCyc = CycImpl.create(getActivity());
-                }
-            }
-        }
-        return iCyc;
+        }));
     }
 
     protected P getCorrespondingP() {
@@ -85,10 +68,7 @@ public abstract class BaseLazyFragment<P extends IPrensenter>
         if (getCorrespondingP() != null) {
             getCorrespondingP().unBindView();
         }
-        getCyc().destory();
-
         p = null;
-        iCyc = null;
     }
 
     protected RxPermissions getRxPermissions() {

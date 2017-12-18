@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * file工具类
  * @author majes
  * @date 12/11/17.
  */

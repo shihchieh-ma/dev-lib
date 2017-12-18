@@ -10,9 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.squareup.leakcanary.RefWatcher;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import java.lang.reflect.Field;
+
+import dev.majes.base.DevLibApplication;
 
 /**
  * @author majes
@@ -145,6 +148,13 @@ public class LazyFragment extends RxFragment {
                 onStopLazy();
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = DevLibApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     @Override

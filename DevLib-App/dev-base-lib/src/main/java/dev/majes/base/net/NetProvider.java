@@ -1,5 +1,6 @@
 package dev.majes.base.net;
 
+import okhttp3.Cache;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -26,4 +27,6 @@ public interface NetProvider {
     boolean handleError(NetError error);
 
     boolean dispatchProgressEnable();
+
+    Cache configCache();
 }
