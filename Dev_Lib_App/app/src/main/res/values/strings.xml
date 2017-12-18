@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Dev_Lib_App</string>
+    <string name="table_gank">极客</string>
+    <string name="table_all">照片</string>
+    <string name="table_know">经典</string>
+    <string name="table_story">故事</string>
+    <string name="table_camera">摄影</string>
+</resources>

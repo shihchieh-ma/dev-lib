@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/relatecontent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/group_tabs"
+        android:background="@color/bg_color" />
+
+    <RadioGroup
+        android:id="@+id/group_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_color"
+        android:orientation="horizontal"
+        android:padding="@dimen/centermargin">
+
+        <RadioButton
+            android:id="@+id/home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/table_gank"
+            android:textColor="@drawable/select_table_text" />
+
+
+        <RadioButton
+            android:id="@+id/pic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/table_all"
+            android:textColor="@drawable/select_table_text" />
+
+
+        <RadioButton
+            android:id="@+id/know"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/table_know"
+            android:textColor="@drawable/select_table_text" />
+
+        <RadioButton
+            android:id="@+id/story"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/table_story"
+            android:textColor="@drawable/select_table_text" />
+
+        <RadioButton
+            android:id="@+id/camera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/table_camera"
+            android:textColor="@drawable/select_table_text" />
+    </RadioGroup>
+</RelativeLayout>
