@@ -9,8 +9,9 @@
 **BaseActivity,BaseFragment,BaseLazyFragment**
 
 BaseActivity,BaseFragment,BaseLazyFragment中通用方法,包含RxPermission,RxBus.泛型是你的presenter.
-```
+
 1 获取RxPermission直接getRxPermissions() 例如
+```
 getRxPermissions().request(Manifest.permission.CAMERA)
                .subscribe(granted -> {
                    if (granted) {
