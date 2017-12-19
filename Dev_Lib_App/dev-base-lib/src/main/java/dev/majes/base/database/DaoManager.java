@@ -1,7 +1,6 @@
 package dev.majes.base.database;
 
 
-import android.content.Context;
 
 import org.greenrobot.greendao.Property;
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -65,7 +64,7 @@ public class DaoManager {
             synchronized (DaoManager.class){
                 if (null == daoMaster){
                     // 注意：默认的 DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
-                    // 所以实现数据库的安全升级。
+                    // 所以实现数据库的安全升级。利用MrigrtionHelper，网上copy的。
                     helper = new MySQLiteOpenHelper(DevLibApplication.getDevLibApplicationContext(), DB_NAME, null);
                     daoMaster = new DaoMaster(helper.getWritableDatabase());
                     //daoMaster = new DaoMaster(helper.getEncryptedWritableDb("123")); //加密 uuid

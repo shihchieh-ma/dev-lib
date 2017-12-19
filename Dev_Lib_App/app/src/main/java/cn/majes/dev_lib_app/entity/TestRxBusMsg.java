@@ -1,13 +1,12 @@
 package cn.majes.dev_lib_app.entity;
 
-import dev.majes.base.rxbus.IRxMsg;
 
 /**
  * @author majes
  * @date 12/17/17.
  */
 
-public class TestRxBusMsg implements IRxMsg {
+public class TestRxBusMsg{
     private String string;
 
     public TestRxBusMsg(String string) {

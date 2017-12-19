@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide;
 import cn.majes.dev_lib_app.R;
 import dev.majes.base.log.Log;
 import dev.majes.base.mvp.BaseActivity;
-import dev.majes.base.rxbus.IRxMsg;
 import dev.majes.widget.photoview.PhotoView;
 
 /**

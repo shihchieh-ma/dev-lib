@@ -34,11 +34,11 @@ public class WindowManagerCtroller implements View.OnClickListener {
         if (null == windowManagerCtroller) {
             synchronized (WindowManagerCtroller.class) {
                 if (null == windowManagerCtroller) {
-                    windowManagerCtroller = new WindowManagerCtroller(context);
                     dm = new DisplayMetrics();
                     androidWindowManager = (android.view.WindowManager)
                             context.getSystemService(Context.WINDOW_SERVICE);
                     androidWindowManager.getDefaultDisplay().getMetrics(dm);
+                    windowManagerCtroller = new WindowManagerCtroller(context);
                 }
             }
         }

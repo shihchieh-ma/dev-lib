@@ -20,7 +20,6 @@ public class HotPresenter extends BasePresenter<HotFragment> {
 
     public void loadData(String type, int page) {
         Api.getApiService().getGankHot(type, PAGE_SIZE, page)
-                .compose(XApi.<HotEntity>getApiTransformer())
                 .compose(XApi.<HotEntity>getScheduler())
                 .compose(getV().<HotEntity>bindToLifecycle())
                 .subscribe(new ApiSubscriber<HotEntity>() {

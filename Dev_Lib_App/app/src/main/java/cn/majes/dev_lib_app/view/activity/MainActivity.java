@@ -78,9 +78,7 @@ public class MainActivity extends BaseActivity {
                         Log.e(permission.granted + "---" + permission.name);
                     }
                 });
-        getRxPermissions().request(Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS)
+        getRxPermissions().request(Manifest.permission.CAMERA)
                 .subscribe(granted -> {
                     if (granted) {
                         Log.e("检测到被授予权限，功能将可用。");

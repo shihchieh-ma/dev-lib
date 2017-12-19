@@ -19,7 +19,6 @@ public class NewsPresenter extends BasePresenter<NewsFragment> {
 
     public void loadData(String type, int page) {
         Api.getApiService().getGankNews(type, PAGE_SIZE, page)
-                .compose(XApi.<NewsEntity>getApiTransformer())
                 .compose(XApi.<NewsEntity>getScheduler())
                 .compose(getV().<NewsEntity>bindToLifecycle())
                 .subscribe(new ApiSubscriber<NewsEntity>() {

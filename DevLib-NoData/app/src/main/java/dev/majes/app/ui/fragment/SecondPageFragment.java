@@ -5,7 +5,6 @@ import android.view.View;
 import dev.majes.app.R;
 import dev.majes.base.log.Log;
 import dev.majes.base.mvp.BaseFragment;
-import dev.majes.base.rxbus.IRxMsg;
 
 /**
  * Author：Marlborn

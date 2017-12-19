@@ -3,8 +3,6 @@ package dev.majes.base.mvp;
 import android.os.Bundle;
 import android.view.View;
 
-import dev.majes.base.rxbus.IRxMsg;
-
 /**
  * @author majes
  * @date 12/11/17.

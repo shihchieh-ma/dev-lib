@@ -18,8 +18,6 @@ import dev.majes.app.ui.fragment.ContactsFragment;
 import dev.majes.app.ui.fragment.NewsFragment;
 import dev.majes.app.ui.fragment.SmsFragment;
 import dev.majes.base.mvp.BaseActivity;
-import dev.majes.base.mvp.IPrensenter;
-import dev.majes.base.rxbus.IRxMsg;
 
 /**
  * Author：Marlborn

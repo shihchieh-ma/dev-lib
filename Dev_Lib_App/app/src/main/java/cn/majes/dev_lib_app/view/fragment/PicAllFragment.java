@@ -20,7 +20,6 @@ import cn.majes.dev_lib_app.entity.TestRxBusMsg;
 import cn.majes.dev_lib_app.presenter.PicPresenter;
 import dev.majes.base.log.Log;
 import dev.majes.base.mvp.BaseFragment;
-import dev.majes.base.rxbus.IRxMsg;
 import dev.majes.base.utils.WindowUtils;
 import dev.majes.utils.WaitShowUtils;
 import dev.majes.widget.windowmanager.WindowManagerCtroller;
@@ -73,10 +72,10 @@ public class PicAllFragment extends BaseFragment<PicPresenter> implements OnRefr
     public void initData(Bundle savedInstanceState) {
         WaitShowUtils.getInstance(getActivity()).show();
         getCorrespondingP().loadData();
-        registerRxBus(IRxMsg.class, new Consumer<IRxMsg>() {
+        registerRxBus(TestRxBusMsg.class, new Consumer<TestRxBusMsg>() {
             @Override
-            public void accept(@NonNull IRxMsg iRxMsg) throws Exception {
-                Log.e(((TestRxBusMsg) iRxMsg).getString());
+            public void accept(@NonNull TestRxBusMsg iRxMsg) throws Exception {
+                Log.e((iRxMsg).getString());
             }
         });
     }
@@ -103,6 +102,7 @@ public class PicAllFragment extends BaseFragment<PicPresenter> implements OnRefr
 
     @Override
     public void onItemClick(View view, Object data) {
+        WaitShowUtils.release();
         if (!WindowUtils.checkFloatWindowPermission(getActivity())){
             WindowUtils.showDialogTipUserRequestPermission(getActivity());
         }else {

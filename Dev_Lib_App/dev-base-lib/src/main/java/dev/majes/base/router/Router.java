@@ -24,8 +24,6 @@ public class Router {
     private int enterAnim = ROUTER_ANIM_ENTER;
     private int exitAnim = ROUTER_ANIM_EXIT;
 
-    public static final int RES_NONE = -1;
-
     private static RouterCallback callback;
 
     private Router() {

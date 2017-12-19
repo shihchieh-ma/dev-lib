@@ -150,11 +150,6 @@ public class LazyFragment extends RxFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         if (isInitReady) {

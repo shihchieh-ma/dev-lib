@@ -13,7 +13,6 @@ import dev.majes.app.adapter.ViewPageAdapter;
 import dev.majes.base.log.Log;
 import dev.majes.base.mvp.BaseActivity;
 import dev.majes.base.mvp.IPrensenter;
-import dev.majes.base.rxbus.IRxMsg;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

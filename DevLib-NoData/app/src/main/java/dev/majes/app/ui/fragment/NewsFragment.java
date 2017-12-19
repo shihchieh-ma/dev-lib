@@ -12,7 +12,6 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 import dev.majes.app.R;
 import dev.majes.app.commen.Commen;
 import dev.majes.base.mvp.BaseFragment;
-import dev.majes.base.rxbus.IRxMsg;
 import java.util.ArrayList;
 import java.util.List;
 

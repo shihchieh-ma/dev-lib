@@ -17,7 +17,6 @@ public class StoryPresenter extends BasePresenter<StoryFragment> {
 
     public void loadData() {
         Api.getOtherService().getUserArticle("gallery_photograthy", String.valueOf(System.currentTimeMillis() / 1000 - 10000))
-                .compose(XApi.<StoryEntity>getApiTransformer())
                 .compose(XApi.<StoryEntity>getScheduler())
                 .compose(getV().<StoryEntity>bindToLifecycle())
                 .subscribe(new ApiSubscriber<StoryEntity>() {

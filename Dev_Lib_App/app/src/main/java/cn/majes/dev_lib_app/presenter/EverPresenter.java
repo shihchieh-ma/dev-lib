@@ -17,7 +17,6 @@ public class EverPresenter extends BasePresenter<EverFragment> {
 
     public void loadData() {
         Api.getOtherService().getNotifyArticle("gallery_story", String.valueOf(System.currentTimeMillis() / 1000 - 10000))
-                .compose(XApi.<EverEntity>getApiTransformer())
                 .compose(XApi.<EverEntity>getScheduler())
                 .compose(getV().<EverEntity>bindToLifecycle())
                 .subscribe(new ApiSubscriber<EverEntity>() {

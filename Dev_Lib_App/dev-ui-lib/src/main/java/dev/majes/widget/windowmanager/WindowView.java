@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.os.Build;
 import android.support.annotation.IntDef;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -226,7 +227,12 @@ public class WindowView extends FrameLayout implements ViewTreeObserver.OnPreDra
         this.mParams = new WindowManager.LayoutParams();
         this.mParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         this.mParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        this.mParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+        //8.0只能用TYPE_APPLICATION_OVERLAY了
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O){
+            this.mParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+        }else {
+            this.mParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
         this.mParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
         this.mParams.format = PixelFormat.TRANSLUCENT;
         this.mParams.gravity = Gravity.LEFT | Gravity.TOP;

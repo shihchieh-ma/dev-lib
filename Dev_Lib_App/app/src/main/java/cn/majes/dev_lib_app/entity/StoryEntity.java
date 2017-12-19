@@ -4,14 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import dev.majes.base.net.IModel;
-
 /**
  * @author majes
  * @date 12/17/17.
  */
 
-public class StoryEntity implements IModel{
+public class StoryEntity{
 
     /**
      * has_more : false

@@ -8,7 +8,6 @@ import cn.majes.dev_lib_app.entity.TestRxBusMsg;
 import dev.majes.base.log.Log;
 import dev.majes.base.mvp.BaseActivity;
 import dev.majes.base.router.Router;
-import dev.majes.base.rxbus.IRxMsg;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 

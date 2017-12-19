@@ -18,7 +18,6 @@ public class PicPresenter extends BasePresenter<PicAllFragment> {
     public void loadData() {
 
         Api.getOtherService().getPhotoArticle("组图", String.valueOf(System.currentTimeMillis() / 1000 - 10000))
-                .compose(XApi.<PicEntity>getApiTransformer())
                 .compose(XApi.<PicEntity>getScheduler())
                 .compose(getV().<PicEntity>bindToLifecycle())
                 .subscribe(new ApiSubscriber<PicEntity>() {

@@ -18,13 +18,9 @@ import cn.majes.dev_lib_app.view.fragment.GankIOFragment;
 import cn.majes.dev_lib_app.view.fragment.PicAllFragment;
 import cn.majes.dev_lib_app.view.fragment.ProFragment;
 import cn.majes.dev_lib_app.view.fragment.StoryFragment;
-import dev.majes.base.log.Log;
 import dev.majes.base.mvp.BaseActivity;
-import dev.majes.base.rxbus.IRxMsg;
 import dev.majes.base.rxbus.RxBus;
 import dev.majes.base.utils.DPXUtils;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author majes
@@ -89,6 +85,22 @@ public class Main2Activity extends BaseActivity implements
         stroyFragment = (StoryFragment) manager.findFragmentByTag("three");
         everFragment = (EverFragment) manager.findFragmentByTag("four");
         proFragment = (ProFragment) manager.findFragmentByTag("five");
+        if (gankIoFragment != null) {
+            transaction.hide(gankIoFragment);
+        }
+        if (picFragment != null) {
+            transaction.hide(picFragment);
+        }
+        if (stroyFragment != null) {
+            transaction.hide(stroyFragment);
+        }
+        if (everFragment != null) {
+            transaction.hide(everFragment);
+        }
+        if (proFragment != null) {
+            transaction.hide(proFragment);
+        }
+
         switch (checkedId) {
             case R.id.home:
                 if (gankIoFragment == null) {
@@ -96,18 +108,6 @@ public class Main2Activity extends BaseActivity implements
                     transaction.add(R.id.relatecontent, gankIoFragment, "one");
                 } else {
                     transaction.show(gankIoFragment);
-                }
-                if (picFragment != null) {
-                    transaction.hide(picFragment);
-                }
-                if (stroyFragment != null) {
-                    transaction.hide(stroyFragment);
-                }
-                if (everFragment != null) {
-                    transaction.hide(everFragment);
-                }
-                if (proFragment != null) {
-                    transaction.hide(proFragment);
                 }
                 break;
             case R.id.pic:
@@ -117,18 +117,6 @@ public class Main2Activity extends BaseActivity implements
                 } else {
                     transaction.show(picFragment);
                 }
-                if (gankIoFragment != null) {
-                    transaction.hide(gankIoFragment);
-                }
-                if (stroyFragment != null) {
-                    transaction.hide(stroyFragment);
-                }
-                if (everFragment != null) {
-                    transaction.hide(everFragment);
-                }
-                if (proFragment != null) {
-                    transaction.hide(proFragment);
-                }
                 break;
             case R.id.story:
                 if (stroyFragment == null) {
@@ -136,18 +124,6 @@ public class Main2Activity extends BaseActivity implements
                     transaction.add(R.id.relatecontent, stroyFragment, "three");
                 } else {
                     transaction.show(stroyFragment);
-                }
-                if (gankIoFragment != null) {
-                    transaction.hide(gankIoFragment);
-                }
-                if (picFragment != null) {
-                    transaction.hide(picFragment);
-                }
-                if (everFragment != null) {
-                    transaction.hide(everFragment);
-                }
-                if (proFragment != null) {
-                    transaction.hide(proFragment);
                 }
                 break;
             case R.id.know:
@@ -157,18 +133,6 @@ public class Main2Activity extends BaseActivity implements
                 } else {
                     transaction.show(everFragment);
                 }
-                if (gankIoFragment != null) {
-                    transaction.hide(gankIoFragment);
-                }
-                if (picFragment != null) {
-                    transaction.hide(picFragment);
-                }
-                if (stroyFragment != null) {
-                    transaction.hide(stroyFragment);
-                }
-                if (proFragment != null) {
-                    transaction.hide(proFragment);
-                }
                 break;
             case R.id.camera:
                 if (proFragment == null) {
@@ -176,18 +140,6 @@ public class Main2Activity extends BaseActivity implements
                     transaction.add(R.id.relatecontent, proFragment, "five");
                 } else {
                     transaction.show(proFragment);
-                }
-                if (gankIoFragment != null) {
-                    transaction.hide(gankIoFragment);
-                }
-                if (picFragment != null) {
-                    transaction.hide(picFragment);
-                }
-                if (stroyFragment != null) {
-                    transaction.hide(stroyFragment);
-                }
-                if (everFragment != null) {
-                    transaction.hide(everFragment);
                 }
                 break;
             default:

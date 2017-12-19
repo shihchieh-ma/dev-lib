@@ -18,7 +18,6 @@ public class ProPresenter extends BasePresenter<ProFragment> {
     public void loadData() {
 
         Api.getOtherService().getOldArticle("gallery_old_picture", String.valueOf(System.currentTimeMillis() / 1000 - 10000))
-                .compose(XApi.<ProEntity>getApiTransformer())
                 .compose(XApi.<ProEntity>getScheduler())
                 .compose(getV().<ProEntity>bindToLifecycle())
                 .subscribe(new ApiSubscriber<ProEntity>() {

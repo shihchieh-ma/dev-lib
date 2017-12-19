@@ -2,14 +2,12 @@ package cn.majes.dev_lib_app.entity;
 
 import java.util.List;
 
-import dev.majes.base.net.IModel;
-
 /**
  * @author majes
  * @date 12/16/17.
  */
 
-public class HotEntity implements IModel {
+public class HotEntity{
 
     /**
      * error : false

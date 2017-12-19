@@ -3,15 +3,12 @@ package cn.majes.dev_lib_app.entity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-
-import dev.majes.base.net.IModel;
-
 /**
  * @author majes
  * @date 12/17/17.
  */
 
-public class EverEntity implements IModel{
+public class EverEntity{
 
     /**
      * has_more : false

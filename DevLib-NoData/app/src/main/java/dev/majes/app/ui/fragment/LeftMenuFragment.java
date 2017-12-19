@@ -10,7 +10,6 @@ import dev.majes.app.R;
 import dev.majes.app.adapter.LeftMenuAdapter;
 import dev.majes.app.bean.LeftBean;
 import dev.majes.base.mvp.BaseFragment;
-import dev.majes.base.rxbus.IRxMsg;
 
 import java.util.ArrayList;
 import java.util.List;
